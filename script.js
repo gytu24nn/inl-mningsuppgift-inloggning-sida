@@ -36,9 +36,15 @@ inputLösenord.type = "password";
 const userName = "test";
 const userPassword = "1234";
 
+/*Här skapar jag en bool som används för att hantera inloggningstatus 
+under den aktuella sessionen.*/ 
 let omDuÄrInloggad = false; 
+/*Här skapar jag en variablen som senare används för att kontrollera om 
+användaren varit inloggad innan genom att kolla localstorage.*/
 const checkIfInlogged = localStorage.getItem("username");
 
+/*Här skriver javascript ut vad som ska skrivas ut i HTML med hjälp av appendchild 
+och den skriver ut om allt som behövs för inloggnins formuläret.*/
 login.appendChild(h1);
 login.appendChild(paragrafAnvändarNamn);
 login.appendChild(inputAnvändarNamn);
@@ -46,6 +52,8 @@ login.appendChild(paragrafLösenord);
 login.appendChild(inputLösenord);
 login.appendChild(button);
 
+/*Här skapas en funktion som anropas när användaren loggat in eller redan är inloggad.
+Den skriver över och tabort de grejer ifrån inloggnings formuläret som ej behövs när man är inloggad. */ 
 function inLoggade() {
     console.log("klick");
     localStorage.setItem("username", userName);
@@ -58,9 +66,12 @@ function inLoggade() {
     button.textContent = "Logga Ut!";
 }
 
+//Här är en if sats som kontrollerar användaren redan är inloggad med data ifrån localstorage.
 if (checkIfInlogged) {
     inLoggade();
 }
+
+//Här skapas de en knapp som väntar på ett klick på knapen.
 
 button.addEventListener("click", () => {
     if (!omDuÄrInloggad) {
@@ -77,6 +88,8 @@ button.addEventListener("click", () => {
         }
     
     }else {
+        /* Om användaren väljer att logga ut igen så ska användaren komma tillbaka till inloggnings 
+        formuläret och logga in igen vilket är det som sker i denna else sats.*/
         localStorage.clear();
         h1.innerHTML = "Logga in!"; 
 
